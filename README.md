@@ -1,58 +1,110 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# KlinikKu - Dashboard Admin Klinik
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web berbasis Laravel 13 untuk mengelola pendaftaran pasien, dokter,
+jadwal pemeriksaan, antrian, dan rekam medis di sebuah klinik.
 
-## About Laravel
+## Fitur Utama
+- Autentikasi (Login, Register, Logout) via Laravel Breeze
+- Manajemen role & permission (Admin, Staff) dengan Spatie Permission
+- Dashboard statistik + grafik tren pendaftaran pasien
+- CRUD: Pasien, Dokter, Jadwal Pemeriksaan, Antrian, Rekam Medis
+- Search & pagination di semua halaman data
+- Ambil nomor antrian otomatis + panggil/selesaikan antrian
+- REST API (JSON) untuk resource Pasien & Dokter
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
+Laravel 13 • PHP 8.3 • MySQL 8 • Blade + Tailwind CSS • Spatie Permission • Breeze
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Struktur Proyek Ini
+Folder ini **bukan** proyek Laravel yang lengkap (tidak menyertakan file inti
+framework seperti `vendor/`, `public/index.php`, dll — file tersebut dihasilkan
+otomatis oleh Composer/Breeze). Folder ini berisi seluruh **kode aplikasi
+custom** (model, controller, migration, seeder, view, route) yang tinggal
+disalin ke proyek Laravel + Breeze yang baru dibuat.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Cara Instalasi
 
 ```bash
-composer require laravel/boost --dev
+# 1. Buat proyek Laravel baru
+composer create-project laravel/laravel klinikku
+cd klinikku
 
-php artisan boost:install
+# 2. Install Breeze (Blade stack) untuk autentikasi
+composer require laravel/breeze --dev
+php artisan breeze:install blade
+npm install && npm run build
+
+# 3. Install Spatie Permission
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+# 4. Salin seluruh isi folder ini ke proyek (timpa file yang sama)
+#    - app/Models, app/Http/Controllers, app/Http/Requests
+#    - database/migrations, database/seeders
+#    - resources/views
+#    - routes/web.php, routes/api.php
+
+# 5. Tambahkan HasRoles ke model User (sudah termasuk di app/Models/User.php)
+
+# 6. Konfigurasi database di .env, lalu jalankan migration & seeder
+php artisan migrate --seed
+
+# 7. Jalankan server
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Akses aplikasi di `http://localhost:8000`.
 
-## Contributing
+## Akun Default (dari seeder)
+| Email | Password | Role |
+|---|---|---|
+| admin@example.com | password | admin |
+| staff@example.com | password | staff |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Admin**: akses penuh ke semua modul, termasuk kelola data Dokter.
+- **Staff**: bisa kelola Pasien, Jadwal, Antrian, Rekam Medis. Data Dokter
+  hanya bisa dilihat (read-only), tidak bisa tambah/edit/hapus.
 
-## Code of Conduct
+## Dokumentasi REST API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Base URL: `/api`
 
-## Security Vulnerabilities
+| Method | Endpoint | Keterangan |
+|---|---|---|
+| GET | `/api/pasien` | List pasien (paginated, `?search=`) |
+| POST | `/api/pasien` | Tambah pasien baru |
+| GET | `/api/pasien/{id}` | Detail satu pasien |
+| PUT/PATCH | `/api/pasien/{id}` | Update pasien |
+| DELETE | `/api/pasien/{id}` | Hapus pasien |
+| GET | `/api/dokter` | List dokter (paginated, `?search=`) |
+| POST | `/api/dokter` | Tambah dokter baru |
+| GET | `/api/dokter/{id}` | Detail satu dokter |
+| PUT/PATCH | `/api/dokter/{id}` | Update dokter |
+| DELETE | `/api/dokter/{id}` | Hapus dokter |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Semua response berbentuk JSON dengan format:
+```json
+{ "success": true, "data": { ... } }
+```
 
-## License
+> Catatan: endpoint API ini belum diberi proteksi token (Sanctum) agar mudah
+> diuji saat demo. Untuk produksi, tambahkan middleware `auth:sanctum` pada
+> route di `routes/api.php`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Struktur Database (Entitas Utama)
+- **pasiens** — data pasien (nama, NIK, tanggal lahir, jenis kelamin, alamat, no telepon)
+- **dokters** — data dokter (nama, spesialisasi, no telepon)
+- **jadwal_pemeriksaans** — jadwal kunjungan (pasien, dokter, tanggal, waktu, keluhan, status)
+- **antrians** — nomor antrian harian (nomor, pasien, dokter, status, waktu daftar)
+- **rekam_medis** — riwayat diagnosis (pasien, dokter, tanggal, diagnosis, resep, catatan)
+
+## Lesson Learned / Catatan Bug
+_(Lengkapi bagian ini sebelum submit sesuai pengalaman kelompok kalian.)_
+- Tantangan yang dihadapi: ...
+- Solusi yang ditempuh: ...
+- Bug yang diketahui: ...
+
+## Tim
+- Nama Anggota 1 — NIM — Peran
+- Nama Anggota 2 — NIM — Peran
+- Nama Anggota 3 — NIM — Peran
