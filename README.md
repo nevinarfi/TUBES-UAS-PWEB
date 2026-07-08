@@ -21,12 +21,12 @@
 
 ### Daftar Anggota
 
-| No | Nama | NIM | Peran Utama | Kontak |
+| No | Nama | NIM 
 |---|---|---|---|---|
-| 1 | | | Ketua / Backend | |
-| 2 | | | Frontend / UI | |
-| 3 | | | Database / API | |
-| 4 | | | QA / Dokumentasi | |
+| 1 | Faiz Azzikri| 230102044|  
+| 2 | Muhammad Fadil Rizki| 230102085 | 
+| 3 |M Firdausa Arfiandi Np |230102074 | 
+| 4 | Muhammad Rizqy Subagja | 230102095| 
 
 ---
 
@@ -47,15 +47,15 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 
 > Setiap anggota wajib mengisi bagian ini sendiri-sendiri sebelum bimbingan, supaya kontribusi masing-masing terlihat jelas.
 
-### Anggota 1 — _(Nama)_
+### Anggota 1 — _(M Firdausa Arfiandi Np)_
 
 | Item | Detail |
 |---|---|
 | Tugas yang dikerjakan | |
-| Status | ☐ Belum mulai ☐ Sedang berjalan ☐ Selesai |
+| Status | ☐ Belum mulai ☐ Sedang berjalan ☑ Selesai |
 | Commit terkait | `git log --author="nama"` → tempel hash/link commit |
-| Kendala yang dihadapi | |
-| Rencana selanjutnya | |
+| Kendala yang dihadapi | mungkin sebisanya kalau ada bug sebisa mungkin akan di benerin|
+| Rencana selanjutnya | tidak ada karena udh puas|
 
 ### Anggota 2 — _(Nama)_
 
@@ -118,7 +118,7 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 
 ## 5. ERD (Entity Relationship Diagram)
 
-_(Tempel gambar/screenshot ERD kalian di sini, atau link ke Draw.io / Miro / dbdiagram.io)_
+
 
 **Entitas utama:**
 - `users` — akun login (relasi ke role via Spatie: admin, staff)
@@ -140,12 +140,9 @@ pasiens ─┬── jadwal_pemeriksaans ──┬── dokters
 
 ## 6. Bukti Autentikasi Berjalan
 
-_(Tempel screenshot di sini)_
 
-- [ ] Screenshot halaman Login
-- [ ] Screenshot halaman Register
-- [ ] Screenshot setelah berhasil login (dashboard)
-- [ ] Screenshot akun dengan role Admin vs Staff (perbedaan akses)
+
+
 
 ---
 
