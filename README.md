@@ -34,12 +34,12 @@
 
 Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 
-- [ ] Setup project Laravel 13 + Breeze + Spatie Permission
-- [ ] Struktur database (ERD) sudah dirancang
-- [ ] Migration seluruh entitas sudah dibuat
-- [ ] Autentikasi (Login, Register, Logout) sudah berjalan
-- [ ] Role Admin & Staff sudah dikonfigurasi
-- [ ] Repository GitHub sudah dibuat, branch `main` terisi starter project
+- [ ☑ ] Setup project Laravel 13 + Breeze + Spatie Permission
+- [ ☑ ] Struktur database (ERD) sudah dirancang
+- [ ☑ ] Migration seluruh entitas sudah dibuat
+- [ ☑ ] Autentikasi (Login, Register, Logout) sudah berjalan
+- [ ☑ ] Role Admin & Staff sudah dikonfigurasi
+- [ ☑ ] Repository GitHub sudah dibuat, branch `main` terisi starter project
 
 ---
 
@@ -53,7 +53,6 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 |---|---|
 | Tugas yang dikerjakan | |
 | Status | ☐ Belum mulai ☐ Sedang berjalan ☑ Selesai |
-| Commit terkait | `git log --author="nama"` → tempel hash/link commit |
 | Kendala yang dihadapi | mungkin sebisanya kalau ada bug sebisa mungkin akan di benerin|
 | Rencana selanjutnya | tidak ada karena udh puas|
 
@@ -63,7 +62,6 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 |---|---|
 | Tugas yang dikerjakan | |
 | Status | ☐ Belum mulai ☐ Sedang berjalan ☐ Selesai |
-| Commit terkait | |
 | Kendala yang dihadapi | |
 | Rencana selanjutnya | |
 
@@ -73,7 +71,6 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 |---|---|
 | Tugas yang dikerjakan | |
 | Status | ☐ Belum mulai ☐ Sedang berjalan ☐ Selesai |
-| Commit terkait | |
 | Kendala yang dihadapi | |
 | Rencana selanjutnya | |
 
@@ -83,7 +80,6 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 |---|---|
 | Tugas yang dikerjakan | |
 | Status | ☐ Belum mulai ☐ Sedang berjalan ☐ Selesai |
-| Commit terkait | |
 | Kendala yang dihadapi | |
 | Rencana selanjutnya | |
 
