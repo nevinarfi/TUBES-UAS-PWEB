@@ -56,14 +56,14 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 | Kendala yang dihadapi | mungkin sebisanya kalau ada bug sebisa mungkin akan di benerin|
 | Rencana selanjutnya | tidak ada karena udh puas|
 
-### Anggota 2 — _(Nama)_
+### Anggota 2 — _(Muhammad Fadil Rizki)_
 
 | Item | Detail |
 |---|---|
-| Tugas yang dikerjakan | |
-| Status | ☐ Belum mulai ☐ Sedang berjalan ☐ Selesai |
-| Kendala yang dihadapi | |
-| Rencana selanjutnya | |
+| Tugas yang dikerjakan | Implementasi CRUD Pasien (Controller, Request, View) |
+| Status | ☐ Belum mulai ☐ Sedang berjalan ☑ Selesai |
+| Kendala yang dihadapi | Sempat bingung di validasi form untuk data unik, tapi sudah bisa. |
+| Rencana selanjutnya | Membantu pengerjaan Dashboard di Checkpoint 2 |
 
 ### Anggota 3 — _(Nama)_
 
@@ -108,6 +108,14 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 | 6 Juli 2026 | 17.30 | arfi | **Fix:** hapus `app/View/Components/AppLayout.php`, jalankan `composer dump-autoload` supaya `<x-app-layout>` memakai layout baru | `feature/ui-layout` |
 | 7 Juli 2026 | 09.00 | arfi | Buat `GuestLayout.php` (khusus halaman login/register) supaya tidak error setelah fix di atas | `feature/ui-layout` |
 | 7 Juli 2026 | 10.00 | arfi | Verifikasi akhir: login sebagai `admin@example.com` & `staff@example.com`, pastikan dashboard tampil dengan sidebar & data statistik sesuai role | `feature/auth-breeze` |
+
+| Tanggal | Waktu | Nama | Aktivitas | Branch / Commit |
+|---|---|---|---|---|
+| 8 Juli 2026 | 10.00 | Fadil | Buat `PasienController` & `PasienRequest` untuk validasi | `feature/crud-pasien` |
+| 8 Juli 2026 | 13.00 | Fadil | Buat view index, create, dan edit untuk data Pasien | `feature/crud-pasien` |
+| 9 Juli 2026 | 09.00 | Fadil | Implementasi fungsi store, update, destroy di Controller | `feature/crud-pasien` |
+| 9 Juli 2026 | 14.00 | Fadil | Tambahkan fitur search & pagination pada tabel pasien | `feature/crud-pasien` |
+| 10 Juli 2026 | 09.00 | Fadil | Integrasi CRUD Dokter (mengikuti pola CRUD Pasien) | `feature/crud-dokter` |
 | | | | | |
 
 ---

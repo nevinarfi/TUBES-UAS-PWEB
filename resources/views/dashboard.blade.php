@@ -1,14 +1,21 @@
 <x-app-layout :title="'Dashboard'" :subtitle="'Ringkasan aktivitas klinik hari ini, ' . now()->translatedFormat('l, d F Y')">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+
+    {{-- === BARIS STATISTIK (5 kartu, fokus ke angka yang berubah hari ini) === --}}
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
-            <p class="text-sm text-slate-500 font-medium">Total Pasien</p>
-            <p class="text-3xl font-bold text-slate-900 mt-2">{{ $totalPasien }}</p>
-            <p class="text-xs text-teal-600 mt-1">🧑‍🤝‍🧑 terdaftar sepanjang waktu</p>
+            <p class="text-sm text-slate-500 font-medium">Menunggu</p>
+            <p id="stat-menunggu" class="text-3xl font-bold text-slate-900 mt-2">{{ $antrianMenunggu }}</p>
+            <p class="text-xs text-orange-600 mt-1">🎫 belum dipanggil</p>
         </div>
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
-            <p class="text-sm text-slate-500 font-medium">Total Dokter</p>
-            <p class="text-3xl font-bold text-slate-900 mt-2">{{ $totalDokter }}</p>
-            <p class="text-xs text-teal-600 mt-1">🩺 tenaga medis aktif</p>
+            <p class="text-sm text-slate-500 font-medium">Dipanggil</p>
+            <p id="stat-dipanggil" class="text-3xl font-bold text-slate-900 mt-2">{{ $antrianDipanggil }}</p>
+            <p class="text-xs text-teal-600 mt-1">📢 sedang diperiksa</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+            <p class="text-sm text-slate-500 font-medium">Selesai Hari Ini</p>
+            <p id="stat-selesai" class="text-3xl font-bold text-slate-900 mt-2">{{ $antrianSelesai }}</p>
+            <p class="text-xs text-emerald-600 mt-1">✅ sudah dilayani</p>
         </div>
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
             <p class="text-sm text-slate-500 font-medium">Jadwal Hari Ini</p>
@@ -16,42 +23,81 @@
             <p class="text-xs text-amber-600 mt-1">📅 pemeriksaan terjadwal</p>
         </div>
         <div class="bg-white rounded-2xl border border-slate-200 p-5">
-            <p class="text-sm text-slate-500 font-medium">Antrian Menunggu</p>
-            <p class="text-3xl font-bold text-slate-900 mt-2">{{ $antrianMenunggu }}</p>
-            <p class="text-xs text-orange-600 mt-1">🎫 belum dipanggil</p>
+            <p class="text-sm text-slate-500 font-medium">Pasien Baru</p>
+            <p class="text-3xl font-bold text-slate-900 mt-2">{{ $pasienBaruHariIni }}</p>
+            <p class="text-xs text-brand-600 mt-1">🧑‍🤝‍🧑 daftar hari ini</p>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6">
-            <h2 class="font-bold text-slate-800 mb-4">Tren Pendaftaran Pasien Baru (6 Bulan Terakhir)</h2>
-            <canvas id="trenChart" height="110"></canvas>
-        </div>
+    {{-- === PANEL UTAMA: antrian real-time (kiri, lebih lebar) + info pendukung (kanan) === --}}
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
 
-        <div class="bg-white rounded-2xl border border-slate-200 p-6">
-            <h2 class="font-bold text-slate-800 mb-4">Antrian Sedang Dipanggil</h2>
-            @if($antrianAktif)
-                <div class="text-center py-4 rounded-xl bg-teal-50 border border-teal-200">
-                    <p class="text-4xl font-bold text-teal-700">{{ $antrianAktif->nomor_antrian }}</p>
-                    <p class="text-sm font-semibold text-slate-700 mt-1">{{ $antrianAktif->pasien->nama }}</p>
-                    <p class="text-xs text-slate-500">dr. {{ $antrianAktif->dokter->nama }}</p>
+        {{-- KIRI: fokus antrian real-time --}}
+        <div class="lg:col-span-2 space-y-6">
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-bold text-slate-800">Sedang Dipanggil</h2>
+                    <span class="text-xs text-slate-400">Update terakhir: <span id="live-time">{{ now()->format('H:i:s') }}</span></span>
                 </div>
-            @else
-                <x-empty-state icon="🎫" title="Tidak ada antrian aktif" description="Belum ada pasien yang sedang dipanggil." />
-            @endif
 
-            <h2 class="font-bold text-slate-800 mt-6 mb-3">Rekam Medis Terbaru</h2>
-            <div class="space-y-3">
-                @forelse($rekamMedisTerbaru as $rm)
-                    <div class="text-sm border-b border-slate-100 pb-2">
-                        <p class="font-medium text-slate-700">{{ $rm->pasien->nama }}</p>
-                        <p class="text-slate-400 text-xs">{{ $rm->diagnosis }} &middot; {{ $rm->tanggal->translatedFormat('d M Y') }}</p>
-                    </div>
-                @empty
-                    <p class="text-sm text-slate-400">Belum ada rekam medis.</p>
-                @endforelse
+                <div id="antrian-aktif-wrapper">
+                    @include('dashboard._antrian_aktif', ['antrianAktif' => $antrianAktif])
+                </div>
             </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-6">
+                <h2 class="font-bold text-slate-800 mb-4">Antrian Berikutnya</h2>
+                <div id="antrian-berikutnya-wrapper" class="divide-y divide-slate-100">
+                    @include('dashboard._antrian_berikutnya', ['antrianBerikutnya' => $antrianBerikutnya])
+                </div>
+            </div>
+
         </div>
+
+        {{-- KANAN: info pendukung, tidak perlu real-time --}}
+        <div class="space-y-6">
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-6">
+                <h2 class="font-bold text-slate-800 mb-4">Dokter Bertugas Hari Ini</h2>
+                <div class="space-y-3">
+                    @forelse($dokterBertugasHariIni as $dokter)
+                        <div class="flex items-center justify-between text-sm border-b border-slate-100 pb-2 last:border-0 last:pb-0">
+                            <div>
+                                <p class="font-medium text-slate-700">dr. {{ $dokter->nama }}</p>
+                                <p class="text-slate-400 text-xs">{{ $dokter->spesialisasi }}</p>
+                            </div>
+                            <span class="text-xs font-semibold text-brand-700 bg-brand-50 px-2 py-1 rounded-lg">
+                                {{ $dokter->jadwal_hari_ini_count }} pasien
+                            </span>
+                        </div>
+                    @empty
+                        <p class="text-sm text-slate-400">Belum ada dokter terjadwal hari ini.</p>
+                    @endforelse
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-6">
+                <h2 class="font-bold text-slate-800 mb-4">Rekam Medis Terbaru</h2>
+                <div class="space-y-3">
+                    @forelse($rekamMedisTerbaru as $rm)
+                        <div class="text-sm border-b border-slate-100 pb-2 last:border-0 last:pb-0">
+                            <p class="font-medium text-slate-700">{{ $rm->pasien->nama }}</p>
+                            <p class="text-slate-400 text-xs">{{ $rm->diagnosis }} &middot; {{ $rm->tanggal->translatedFormat('d M Y') }}</p>
+                        </div>
+                    @empty
+                        <p class="text-sm text-slate-400">Belum ada rekam medis.</p>
+                    @endforelse
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- === TREN (historis, prioritas rendah, taruh paling bawah) === --}}
+    <div class="bg-white rounded-2xl border border-slate-200 p-6">
+        <h2 class="font-bold text-slate-800 mb-4">Tren Pendaftaran Pasien Baru (6 Bulan Terakhir)</h2>
+        <canvas id="trenChart" height="90"></canvas>
     </div>
 
     @push('scripts')
@@ -76,6 +122,55 @@
                 scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
             }
         });
+    </script>
+
+    {{-- Auto-refresh panel antrian setiap 10 detik tanpa reload halaman. --}}
+    <script>
+        function renderAntrianAktif(data) {
+            if (!data) {
+                return `
+                    <div class="text-center py-10">
+                        <div class="text-4xl mb-2">🎫</div>
+                        <p class="font-semibold text-slate-700">Tidak ada antrian aktif</p>
+                        <p class="text-sm text-slate-400 mt-1">Belum ada pasien yang sedang dipanggil.</p>
+                    </div>`;
+            }
+            return `
+                <div class="text-center py-6 rounded-xl bg-teal-50 border border-teal-200">
+                    <p class="text-4xl font-bold text-teal-700">${data.nomor_antrian}</p>
+                    <p class="text-sm font-semibold text-slate-700 mt-1">${data.pasien}</p>
+                    <p class="text-xs text-slate-500">dr. ${data.dokter}</p>
+                </div>`;
+        }
+
+        function renderAntrianBerikutnya(list) {
+            if (!list || list.length === 0) {
+                return '<p class="text-sm text-slate-400 py-2">Tidak ada antrian menunggu.</p>';
+            }
+            return list.map(a => `
+                <div class="flex items-center justify-between text-sm py-2.5">
+                    <div>
+                        <p class="font-semibold text-slate-700">${a.nomor_antrian}</p>
+                        <p class="text-slate-400 text-xs">${a.pasien} &middot; dr. ${a.dokter}</p>
+                    </div>
+                </div>`).join('');
+        }
+
+        function refreshAntrian() {
+            fetch("{{ route('dashboard.live') }}", { headers: { 'Accept': 'application/json' } })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('antrian-aktif-wrapper').innerHTML = renderAntrianAktif(data.antrian_aktif);
+                    document.getElementById('antrian-berikutnya-wrapper').innerHTML = renderAntrianBerikutnya(data.antrian_berikutnya);
+                    document.getElementById('stat-menunggu').textContent = data.jumlah_menunggu;
+                    document.getElementById('stat-dipanggil').textContent = data.jumlah_dipanggil;
+                    document.getElementById('stat-selesai').textContent = data.jumlah_selesai;
+                    document.getElementById('live-time').textContent = data.updated_at;
+                })
+                .catch(err => console.error('Gagal memuat data antrian:', err));
+        }
+
+        setInterval(refreshAntrian, 10000); // polling tiap 10 detik
     </script>
     @endpush
 </x-app-layout>
