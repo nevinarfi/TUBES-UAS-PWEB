@@ -9,16 +9,18 @@ class PasienController extends Controller
 {
     public function index()
     {
-        $pasiens = Pasien::query()
-            ->when(request('search'), function ($query, $search) {
-                $query->where('nama', 'like', "%{$search}%")
-                    ->orWhere('nik', 'like', "%{$search}%");
-            })
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
+    $pasiens = Pasien::query()
+        ->when(request('search'), function ($query, $search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                  ->orWhere('nik', 'like', "%{$search}%");
+            });
+        })
+        ->latest()
+        ->paginate(50)
+        ->withQueryString();
 
-        return view('pasien.index', compact('pasiens'));
+    return view('pasien.index', compact('pasiens'));
     }
 
     public function create()

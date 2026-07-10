@@ -65,14 +65,14 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 | Kendala yang dihadapi | Sempat bingung di validasi form untuk data unik, tapi sudah bisa. |
 | Rencana selanjutnya | Membantu pengerjaan Dashboard di Checkpoint 2 |
 
-### Anggota 3 — _(Nama)_
+### Anggota 3 — _(Faiz Azzikri)_
 
 | Item | Detail |
 |---|---|
 | Tugas yang dikerjakan | |
-| Status | ☐ Belum mulai ☐ Sedang berjalan ☐ Selesai |
-| Kendala yang dihadapi | |
-| Rencana selanjutnya | |
+| Status | ☐ Belum mulai ☐ Sedang berjalan ☑ Selesai |
+| Kendala yang dihadapi | Saat clone tidak bisa dapat verifikasi mailtrap, alhamdulillah sudah bisa |
+| Rencana selanjutnya | Membantu pengerjaan Checkpoint revisi |
 
 ### Anggota 4 — _(Nama)_
 
@@ -116,6 +116,28 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 | 9 Juli 2026 | 09.00 | Fadil | Implementasi fungsi store, update, destroy di Controller | `feature/crud-pasien` |
 | 9 Juli 2026 | 14.00 | Fadil | Tambahkan fitur search & pagination pada tabel pasien | `feature/crud-pasien` |
 | 10 Juli 2026 | 09.00 | Fadil | Integrasi CRUD Dokter (mengikuti pola CRUD Pasien) | `feature/crud-dokter` |
+
+| Tanggal | Waktu | Nama | Aktivitas | Branch / Commit |
+| 11 Juli 2026 | 23.30 | Faiz | Install & konfigurasi **Spatie Laravel Permission**, verifikasi package dan middleware role pada project                                             | `feature/role-permission` |
+
+| 11 Juli 2026 | 00.30 | Faiz | Membuat `RolePermissionSeeder` berisi role **admin** dan **staff** beserta 19 permission sistem                                                      | `feature/role-permission` |
+
+| 11 Juli 2026 | 2.30 | Faiz | Integrasi `RolePermissionSeeder` ke `DatabaseSeeder`, assign role pada akun demo (`admin@example.com` & `staff@example.com`)                         | `feature/role-permission` |
+
+| 11 Juli 2026 | 3.00 | Faiz | Verifikasi implementasi Role & Permission menggunakan Laravel Tinker serta pengecekan role dan permission pada database                              | `feature/role-permission` |
+
+| 11 Juli 2026 | 04.30 | Faiz | Revisi menu **Data Pasien**: meningkatkan pagination dari 10 menjadi **50 data** per halaman dan merapikan query pencarian                           | `feature/crud-pasien`     |
+
+| 11 Juli 2026 | 04.50 | Faiz | Membuat `PasienFactory` dan menambahkan **120 data dummy pasien** untuk kebutuhan pengujian pagination dan pencarian                                 | `feature/seeder`          |
+
+| 11 Juli 2026 | 06.00 | Faiz | Revisi menu **Data Dokter**: menambahkan **dropdown filter spesialisasi** yang dapat dikombinasikan dengan fitur pencarian                           | `feature/crud-dokter`     |
+
+| 11 Juli 2026 | 06.45 | Faiz | Membuat `DokterFactory` dan menambahkan **60 data dummy dokter** untuk pengujian filter dan pagination                                               | `feature/seeder`          |
+
+| 11 Juli 2026 | 06.45 | Faiz | Mengubah pagination menu **Data Dokter** menjadi **50 data** per halaman serta mempertahankan parameter filter menggunakan `withQueryString()`       | `feature/crud-dokter`     |
+
+| 11 Juli 2026 | 06.45 | Faiz | Review dan penyesuaian implementasi Role & Permission pada tampilan (Blade) menggunakan directive `@role` untuk membatasi menu dan aksi khusus admin | `feature/role-permission` |
+
 | | | | | |
 
 ---
@@ -174,4 +196,4 @@ Target: **Fitur CRUD pertama selesai**
 
 ---
 
-*Laporan ini diperbarui terakhir pada: _(tanggal)_ oleh _(nama)_*
+*Laporan ini diperbarui terakhir pada: _(11/07/2026)_ oleh _(FaizAzzikri)_*
