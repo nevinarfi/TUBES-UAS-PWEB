@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\CarbonPeriod;
 use App\Models\Antrian;
 use App\Models\Dokter;
 use App\Models\JadwalPemeriksaan;
@@ -77,12 +78,14 @@ class DashboardController extends Controller
 
         // Dokter bertugas hari ini: dokter yang punya jadwal periksa hari ini,
         // lengkap dengan jumlah pasien terjadwal (dipakai sebagai indikator beban/kuota).
-        $dokterBertugasHariIni = Dokter::withCount([
-            'jadwalPemeriksaans as jadwal_hari_ini_count' => fn ($q) => $q->whereDate('tanggal', today()),
-        ])
-            ->having('jadwal_hari_ini_count', '>', 0)
-            ->orderByDesc('jadwal_hari_ini_count')
-            ->get();
+        $dokterBertugasHariIni = Dokter::whereHas('jadwalPemeriksaans', function ($q) {
+        $q->whereDate('tanggal', today());
+    })
+    ->withCount([
+        'jadwalPemeriksaans as jadwal_hari_ini_count' => fn ($q) => $q->whereDate('tanggal', today()),
+    ])
+    ->orderByDesc('jadwal_hari_ini_count')
+    ->get();
 
         $rekamMedisTerbaru = RekamMedis::with(['pasien', 'dokter'])
             ->latest()
@@ -100,7 +103,15 @@ class DashboardController extends Controller
             ];
         }
 
+        $jadwalKalender = JadwalPemeriksaan::with(['pasien','dokter'])
+        ->orderBy('tanggal')
+        ->get()
+        ->groupBy(function ($item) {
+            return $item->tanggal->format('Y-m-d');
+        });
+
         return [
+            'jadwalKalender' => $jadwalKalender,
             'totalPasien' => $totalPasien,
             'totalDokter' => $totalDokter,
             'jadwalHariIni' => $jadwalHariIni,

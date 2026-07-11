@@ -65,6 +65,9 @@ class DatabaseSeeder extends Seeder
             'status' => 'terjadwal',
         ]);
 
+        // Tambahkan 100 jadwal dummy
+        JadwalPemeriksaan::factory(100)->create();
+
         // Antrian
         Antrian::firstOrCreate([
             'nomor_antrian' => 'A001',

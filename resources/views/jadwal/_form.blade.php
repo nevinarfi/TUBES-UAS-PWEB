@@ -1,5 +1,5 @@
 @php $j = $jadwal ?? null; @endphp
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <div class="grid grid-cols-2 gap-4">
     <div>
         <label class="block text-sm font-medium text-slate-700 mb-1">Pasien</label>
@@ -12,10 +12,20 @@
     </div>
     <div>
         <label class="block text-sm font-medium text-slate-700 mb-1">Dokter</label>
-        <select name="dokter_id" class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+        <select
+            id="dokter_id"
+            name="dokter_id"
+            class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+
             @foreach($dokters as $d)
-                <option value="{{ $d->id }}" @selected(old('dokter_id', $j->dokter_id ?? '') == $d->id)>dr. {{ $d->nama }}</option>
+                <option
+                    value="{{ $d->id }}"
+                    data-hari='@json($d->hari_praktik)'
+                    @selected(old('dokter_id', $j->dokter_id ?? '') == $d->id)>
+                    dr. {{ $d->nama }}
+                </option>
             @endforeach
+
         </select>
         @error('dokter_id') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
     </div>
@@ -24,7 +34,7 @@
 <div class="grid grid-cols-2 gap-4">
     <div>
         <label class="block text-sm font-medium text-slate-700 mb-1">Tanggal</label>
-        <input type="date" name="tanggal" value="{{ old('tanggal', isset($j) ? $j->tanggal->format('Y-m-d') : '') }}"
+        <input id="tanggal"type="date"name="tanggal" value="{{ old('tanggal', isset($j) ? $j->tanggal->format('Y-m-d') : '') }}"
                class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
         @error('tanggal') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
     </div>
@@ -51,3 +61,49 @@
     </select>
     @error('status') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dokter = document.getElementById("dokter_id");
+    const tanggal = document.getElementById("tanggal");
+
+    const namaHari = [
+        "Minggu",
+        "Senin",
+        "Selasa",
+        "Rabu",
+        "Kamis",
+        "Jumat",
+        "Sabtu"
+    ];
+
+    function cekHariPraktik() {
+
+        if (!tanggal.value) return;
+
+        const option = dokter.options[dokter.selectedIndex];
+
+        const hariPraktik = JSON.parse(option.dataset.hari || "[]");
+
+        const hariDipilih =
+            namaHari[new Date(tanggal.value).getDay()];
+
+        if (!hariPraktik.includes(hariDipilih)) {
+
+            alert(
+                "Dokter hanya praktik pada hari: " +
+                hariPraktik.join(", ")
+            );
+
+            tanggal.value = "";
+
+        }
+
+    }
+
+    dokter.addEventListener("change", cekHariPraktik);
+    tanggal.addEventListener("change", cekHariPraktik);
+
+});
+</script>
