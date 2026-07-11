@@ -74,14 +74,14 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 | Kendala yang dihadapi | Saat clone tidak bisa dapat verifikasi mailtrap, alhamdulillah sudah bisa |
 | Rencana selanjutnya | Membantu pengerjaan Checkpoint revisi |
 
-### Anggota 4 — _(Nama)_
+### Anggota 4 — _(Muhammad Rizqy Subagja)_
 
 | Item | Detail |
 |---|---|
 | Tugas yang dikerjakan | |
-| Status | ☐ Belum mulai ☐ Sedang berjalan ☐ Selesai |
-| Kendala yang dihadapi | |
-| Rencana selanjutnya | |
+| Status | ☐ Belum mulai ☐ Sedang berjalan ☑  Selesai |
+| Kendala yang dihadapi | | terkadang error dikarenakan memakai database berbeda, tetapi akhirnya bisa  |
+| Rencana selanjutnya | | Membantu kawan kawan di checkpoint 3 atau nanti di hari H Ujian
 
 ---
 
@@ -137,6 +137,14 @@ Sesuai jadwal bimbingan, target yang harus selesai di checkpoint ini:
 | 11 Juli 2026 | 06.45 | Faiz | Mengubah pagination menu **Data Dokter** menjadi **50 data** per halaman serta mempertahankan parameter filter menggunakan `withQueryString()`       | `feature/crud-dokter`     |
 
 | 11 Juli 2026 | 06.45 | Faiz | Review dan penyesuaian implementasi Role & Permission pada tampilan (Blade) menggunakan directive `@role` untuk membatasi menu dan aksi khusus admin | `feature/role-permission` |
+
+| Tanggal      | Waktu | Nama  | Aktivitas                                                                                                                                       | Branch / Commit                   |
+| ------------ | ----- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| 10 Juli 2026 | 10.00 | Rizqy | Menambahkan kalender jadwal pemeriksaan pada halaman Dashboard menggunakan Flatpickr beserta tampilan agenda berdasarkan tanggal yang dipilih   | `feature/dashboard-calendar`      |
+| 10 Juli 2026 | 13.00 | Rizqy | Revisi modul Data Dokter dengan menambahkan pengaturan hari praktik dokter sebagai acuan penjadwalan pemeriksaan                                | `feature/dokter-practice-day`     |
+| 11 Juli 2026 | 09.00 | Rizqy | Menambahkan fitur pagination pada halaman Jadwal Pemeriksaan agar data dapat ditampilkan per halaman dan lebih mudah dikelola                   | `feature/jadwal-pagination`       |
+| 11 Juli 2026 | 11.00 | Rizqy | Menambahkan validasi pemilihan tanggal pemeriksaan sehingga pasien hanya dapat memilih tanggal sesuai hari praktik dokter menggunakan Flatpickr | `feature/jadwal-validasi-praktik` |
+| 11 Juli 2026 | 14.00 | Rizqy | Pengujian dan perbaikan fitur penjadwalan, kalender dashboard, serta validasi hari praktik dokter                                               | `feature/dashboard-calendar`      |
 
 | | | | | |
 
