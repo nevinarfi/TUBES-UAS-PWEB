@@ -204,4 +204,4 @@ Target: **Fitur CRUD pertama selesai**
 
 ---
 
-*Laporan ini diperbarui terakhir pada: _(11/07/2026)_ oleh _(FaizAzzikri)_*
+*Laporan ini diperbarui terakhir pada: _(11/07/2026)_ oleh _(Muhammad Rizqy Subagja)_*
