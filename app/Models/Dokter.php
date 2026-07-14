@@ -10,10 +10,18 @@ class Dokter extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
-        'spesialisasi',
-        'no_telepon',
+    'nama',
+    'spesialisasi',
+    'no_telepon',
+    'hari_praktik',
     ];
+    
+    protected function casts(): array
+    {
+        return [
+            'hari_praktik' => 'array',
+        ];
+    }
 
     public function jadwalPemeriksaans()
     {

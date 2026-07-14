@@ -1,3 +1,4 @@
+
 <x-app-layout :title="'Dashboard'" :subtitle="'Ringkasan aktivitas klinik hari ini, ' . now()->translatedFormat('l, d F Y')">
 
     {{-- === BARIS STATISTIK (5 kartu, fokus ke angka yang berubah hari ini) === --}}
@@ -78,6 +79,29 @@
             </div>
 
             <div class="bg-white rounded-2xl border border-slate-200 p-6">
+
+                <h2 class="font-bold text-slate-800 mb-4">
+                    Kalender Jadwal Pemeriksaan
+                </h2>
+
+                <input
+                    id="calendarDashboard"
+                    class="w-full rounded-lg border-slate-300"
+                    placeholder="Pilih tanggal">
+
+                <div
+                    id="agendaHari"
+                    class="mt-4 text-sm space-y-2">
+
+                    <p class="text-slate-400">
+                        Pilih tanggal untuk melihat jadwal.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-6">
                 <h2 class="font-bold text-slate-800 mb-4">Rekam Medis Terbaru</h2>
                 <div class="space-y-3">
                     @forelse($rekamMedisTerbaru as $rm)
@@ -101,7 +125,7 @@
     </div>
 
     @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('trenChart');
         new Chart(ctx, {
@@ -172,5 +196,62 @@
 
         setInterval(refreshAntrian, 10000); // polling tiap 10 detik
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+
+const jadwal = @json($jadwalKalender);
+
+flatpickr("#calendarDashboard",{
+
+    inline:true,
+
+    dateFormat:"Y-m-d",
+
+    onChange:function(selectedDates,dateStr){
+
+        const agenda=document.getElementById("agendaHari");
+
+        if(!jadwal[dateStr]){
+
+            agenda.innerHTML=
+            "<p class='text-slate-400'>Tidak ada jadwal.</p>";
+
+            return;
+
+        }
+
+        let html="";
+
+        jadwal[dateStr].forEach(function(item){
+
+            html += `
+                <div class="border-b pb-2">
+
+                    <div class="font-semibold">
+                        ${item.waktu}
+                    </div>
+
+                    <div>
+                        ${item.pasien.nama}
+                    </div>
+
+                    <div class="text-slate-500">
+                        dr. ${item.dokter.nama}
+                    </div>
+
+                </div>
+            `;
+
+        });
+
+        agenda.innerHTML=html;
+
+    }
+
+});
+
+</script>
     @endpush
 </x-app-layout>
+

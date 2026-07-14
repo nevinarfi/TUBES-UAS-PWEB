@@ -7,19 +7,38 @@ use App\Models\Dokter;
 
 class DokterController extends Controller
 {
-    public function index()
-    {
-        $dokters = Dokter::query()
-            ->when(request('search'), function ($query, $search) {
-                $query->where('nama', 'like', "%{$search}%")
-                    ->orWhere('spesialisasi', 'like', "%{$search}%");
-            })
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
+   public function index()
+{
+    $query = Dokter::query();
 
-        return view('dokter.index', compact('dokters'));
+    // Search nama atau spesialisasi
+    if (request()->filled('search')) {
+        $search = request('search');
+
+        $query->where(function ($q) use ($search) {
+            $q->where('nama', 'like', "%{$search}%")
+              ->orWhere('spesialisasi', 'like', "%{$search}%");
+        });
     }
+
+    // Filter spesialisasi
+    if (request()->filled('spesialisasi')) {
+        $query->where('spesialisasi', request('spesialisasi'));
+    }
+
+    $dokters = $query
+        ->latest()
+        ->paginate(50)
+        ->withQueryString();
+
+    // Ambil daftar spesialisasi unik
+    $spesialisasi = Dokter::select('spesialisasi')
+        ->distinct()
+        ->orderBy('spesialisasi')
+        ->pluck('spesialisasi');
+
+    return view('dokter.index', compact('dokters', 'spesialisasi'));
+}
 
     public function create()
     {

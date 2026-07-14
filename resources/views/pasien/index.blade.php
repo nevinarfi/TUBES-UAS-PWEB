@@ -1,10 +1,20 @@
 <x-app-layout :title="'Data Pasien'" :subtitle="'Kelola data pasien terdaftar di KlinikKu'">
     <div class="bg-white rounded-2xl border border-slate-200">
         <div class="p-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between border-b border-slate-100">
-            <form method="GET" class="flex-1 max-w-sm">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau NIK..."
-                       class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
-            </form>
+            <form method="GET" class="flex-1 max-w-md flex gap-2">
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Cari nama atau NIK..."
+                    class="flex-1 rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+
+                <button
+                    type="submit"
+                    class="px-4 rounded-xl bg-teal-600 text-white hover:bg-teal-700">
+                    Cari
+                </button>
+         </form>
             <a href="{{ route('pasien.create') }}" class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
                 + Tambah Pasien
             </a>

@@ -1,15 +1,47 @@
 <x-app-layout :title="'Data Dokter'" :subtitle="'Daftar tenaga medis KlinikKu'">
     <div class="bg-white rounded-2xl border border-slate-200">
-        <div class="p-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between border-b border-slate-100">
-            <form method="GET" class="flex-1 max-w-sm">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau spesialisasi..."
-                       class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+                <div class="p-5 flex flex-col lg:flex-row gap-3 lg:items-center lg:justify-between border-b border-slate-100">
+
+            <form method="GET" class="flex flex-col sm:flex-row gap-3 flex-1">
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Cari nama dokter..."
+                    class="w-full sm:w-64 rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+
+                <select
+                    name="spesialisasi"
+                    class="w-full sm:w-56 rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+
+                    <option value="">Semua Spesialisasi</option>
+
+                    @foreach($spesialisasi as $item)
+                        <option
+                            value="{{ $item }}"
+                            {{ request('spesialisasi') == $item ? 'selected' : '' }}>
+                            {{ $item }}
+                        </option>
+                    @endforeach
+
+                </select>
+
+                <button
+                    type="submit"
+                    class="px-5 rounded-xl bg-teal-600 text-white hover:bg-teal-700">
+                    Filter
+                </button>
+
             </form>
+
             @role('admin')
-            <a href="{{ route('dokter.create') }}" class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
-                + Tambah Dokter
-            </a>
+                <a href="{{ route('dokter.create') }}"
+                class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+                    + Tambah Dokter
+                </a>
             @endrole
+
         </div>
 
         <div class="overflow-x-auto">
