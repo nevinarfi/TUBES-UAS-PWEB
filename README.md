@@ -204,4 +204,26 @@ Target: **Fitur CRUD pertama selesai**
 
 ---
 
+# 9. Dokumentasi REST API Klinikku
+
+Project ini menyediakan REST API untuk mengelola data Klinik, mencakup data Dokter dan Pasien.
+
+## API Dokter
+Endpoint untuk operasi CRUD pada resource Dokter:
+
+* **GET /api/dokters** : Menampilkan semua data dokter.
+* **POST /api/dokters** : Menambahkan data dokter baru.
+* **GET /api/dokters/{id}** : Menampilkan detail satu dokter berdasarkan ID.
+* **PUT /api/dokters/{id}** : Mengubah atau memperbarui data dokter berdasarkan ID.
+* **DELETE /api/dokters/{id}** : Menghapus data dokter berdasarkan ID.
+
+## API Pasien
+Endpoint untuk operasi CRUD pada resource Pasien:
+
+* **GET /api/pasiens** : Menampilkan semua data pasien.
+* **POST /api/pasiens** : Menambahkan data pasien baru.
+* **GET /api/pasiens/{id}** : Menampilkan detail satu pasien berdasarkan ID.
+* **PUT /api/pasiens/{id}** : Mengubah atau memperbarui data pasien berdasarkan ID.
+* **DELETE /api/pasiens/{id}** : Menghapus data pasien berdasarkan ID.
+
 *Laporan ini diperbarui terakhir pada: _(11/07/2026)_ oleh _(Muhammad Rizqy Subagja)_*
