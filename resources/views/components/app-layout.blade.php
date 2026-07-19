@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -92,7 +97,7 @@
                     <span class="font-extrabold tracking-tight">KlinikKu</span>
                 </div>
                 <button @click="mobileOpen = !mobileOpen" class="p-2">
-                    <x-icon name="menu" class="w-6 h-6" />
+                    <x-app-icon name="menu" class="w-6 h-6" />
                 </button>
             </div>
             <div x-show="mobileOpen" x-cloak @click.away="mobileOpen = false"
@@ -144,12 +149,12 @@
             <main class="flex-1 p-4 lg:p-8 max-w-[1400px] w-full mx-auto">
                 @if (session('success'))
                     <div class="mb-6 rounded-xl bg-brand-50 border border-brand-200 text-brand-800 px-4 py-3 text-sm font-medium flex items-center gap-2">
-                        <x-icon name="check-circle" class="w-5 h-5 shrink-0" /> {{ session('success') }}
+                        <x-app-icon name="check-circle" class="w-5 h-5 shrink-0" /> {{ session('success') }}
                     </div>
                 @endif
                 @if (session('error'))
                     <div class="mb-6 rounded-xl bg-red-50 border border-red-200 text-red-800 px-4 py-3 text-sm font-medium flex items-center gap-2">
-                        <x-icon name="exclamation" class="w-5 h-5 shrink-0" /> {{ session('error') }}
+                        <x-app-icon name="exclamation" class="w-5 h-5 shrink-0" /> {{ session('error') }}
                     </div>
                 @endif
 
@@ -157,6 +162,10 @@
             </main>
         </div>
     </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 
     @stack('scripts')
 </body>

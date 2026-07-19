@@ -3,15 +3,15 @@
         <div class="p-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between border-b border-slate-100">
             <form method="GET" class="flex-1 max-w-sm">
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama pasien..."
-                       class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+                       class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 py-3">
             </form>
-            <a href="{{ route('jadwal.create') }}" class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+            <a href="{{ route('jadwal.create') }}" class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white py-3 font-semibold px-4 py-2.5 rounded-xl transition">
                 + Tambah Jadwal
             </a>
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-sm">
+            <table class="w-full py-3">
                 <thead>
                     <tr class="text-left text-slate-500 border-b border-slate-100">
                         <th class="px-5 py-3 font-medium">Pasien</th>

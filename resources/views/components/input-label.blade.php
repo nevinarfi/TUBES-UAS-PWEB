@@ -1,5 +1,7 @@
-@props(['value'])
+@props(['disabled' => false])
 
-<label {{ $attributes->merge(['class' => 'block font-medium text-sm text-gray-700']) }}>
-    {{ $value ?? $slot }}
-</label>
+<input
+    @disabled($disabled)
+    {{ $attributes->merge([
+        'class' => 'form-control'
+    ]) }}>

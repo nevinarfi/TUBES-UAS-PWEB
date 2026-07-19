@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\CarbonPeriod;
 use App\Models\Antrian;
 use App\Models\Dokter;
 use App\Models\JadwalPemeriksaan;
@@ -100,7 +101,15 @@ class DashboardController extends Controller
             ];
         }
 
+        $jadwalKalender = JadwalPemeriksaan::with(['pasien','dokter'])
+        ->orderBy('tanggal')
+        ->get()
+        ->groupBy(function ($item) {
+            return $item->tanggal->format('Y-m-d');
+        });
+
         return [
+            'jadwalKalender' => $jadwalKalender,
             'totalPasien' => $totalPasien,
             'totalDokter' => $totalDokter,
             'jadwalHariIni' => $jadwalHariIni,

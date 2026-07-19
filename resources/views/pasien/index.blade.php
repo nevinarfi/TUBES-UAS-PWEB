@@ -7,7 +7,7 @@
                     name="search"
                     value="{{ request('search') }}"
                     placeholder="Cari nama atau NIK..."
-                    class="flex-1 rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">
+                    class="flex-1 rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 py-3">
 
                 <button
                     type="submit"
@@ -15,13 +15,13 @@
                     Cari
                 </button>
          </form>
-            <a href="{{ route('pasien.create') }}" class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+            <a href="{{ route('pasien.create') }}" class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white py-3 font-semibold px-4 py-2.5 rounded-xl transition">
                 + Tambah Pasien
             </a>
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-sm">
+            <table class="w-full py-3">
                 <thead>
                     <tr class="text-left text-slate-500 border-b border-slate-100">
                         <th class="px-5 py-3 font-medium">Nama</th>

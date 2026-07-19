@@ -2,7 +2,7 @@
     <div class="max-w-2xl bg-white rounded-2xl border border-slate-200 p-6">
         <form method="POST" action="{{ route('rekam-medis.store') }}" class="space-y-5">
             @csrf
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Pasien</label>
                     <select name="pasien_id" class="w-full rounded-xl border-slate-300 focus:border-teal-500 focus:ring-teal-500 text-sm">

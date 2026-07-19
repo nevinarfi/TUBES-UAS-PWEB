@@ -1,3 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+    .form-control{
+        @apply w-full rounded-xl border border-slate-300
+               bg-white px-4 py-3 text-base
+               focus:border-teal-500
+               focus:ring-2
+               focus:ring-teal-500/20;
+    }
+
+}
+
+/* =======================
+   TOMSELECT
+======================= */
+
+.ts-wrapper{
+    width:100%;
+}
+
+.ts-wrapper .ts-control{
+    @apply border border-slate-300 rounded-xl bg-white text-base;
+    min-height:48px;
+    padding:0 12px;
+    display:flex;
+    align-items:center;
+    flex-wrap:nowrap;
+    box-shadow:none;
+}
+
+.ts-wrapper.focus .ts-control{
+    @apply border-teal-500 ring-2 ring-teal-500/20;
+}
+
+.ts-control .item{
+    margin:0;
+    padding:0;
+    line-height:1.5;
+    white-space:nowrap;
+}
+
+.ts-control input{
+    flex:1;
+    min-width:20px;
+    margin-left:4px;
+    padding:0;
+    border:0;
+    outline:none;
+    background:transparent;
+    font-size:0.875rem;
+    line-height:1.5;
+}
+
+.ts-dropdown{
+    @apply rounded-xl border border-slate-200 shadow-lg;
+}
+
+.ts-dropdown .active{
+    @apply bg-teal-50 text-teal-700;
+}

@@ -16,7 +16,7 @@ class JadwalController extends Controller
                 $query->whereHas('pasien', fn ($q) => $q->where('nama', 'like', "%{$search}%"));
             })
             ->orderBy('tanggal', 'desc')
-            ->paginate(10)
+            ->paginate(50)
             ->withQueryString();
 
         return view('jadwal.index', compact('jadwals'));

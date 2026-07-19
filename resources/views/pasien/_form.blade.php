@@ -14,7 +14,7 @@
     @error('nik') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
 </div>
 
-<div class="grid grid-cols-2 gap-4">
+<div class="grid md:grid-cols-2 grid-cols-1 gap-4">
     <div>
         <label class="block text-sm font-medium text-slate-700 mb-1">Tanggal Lahir</label>
         <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', isset($p) ? $p->tanggal_lahir->format('Y-m-d') : '') }}"
